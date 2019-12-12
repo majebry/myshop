@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 
 class ProductController extends Controller
@@ -11,7 +12,8 @@ class ProductController extends Controller
         $products = Product::latest()->get();
 
         return view('products.index', [
-            'products' => $products
+            'products' => $products,
+            'categories' => Category::all()
         ]);
     }
 

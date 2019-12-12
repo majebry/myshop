@@ -37,9 +37,9 @@
           <h2>Categories</h2>
 
           <ul class="list-group">
-            <li class="list-group-item bg-secondary text-white">Category 1</li>
-            <li class="list-group-item bg-secondary text-white">Category 2</li>
-            <li class="list-group-item bg-secondary text-white">Category 3</li>
+            @foreach ($categories as $category)
+                <li class="list-group-item bg-secondary text-white">{{ $category->name }}</li>
+            @endforeach
           </ul>
         </div>
 
