@@ -9,10 +9,17 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->get();
+        $products = Product::latest(); // Product::query()
+
+        // if the user requested products for a specific category
+        // just return for them products for that category
+
+        $products->when(request('category_id'), function($q) {
+            $q->where('category_id', request('category_id'));
+        });
 
         return view('products.index', [
-            'products' => $products,
+            'products' => $products->get(),
             'categories' => Category::all()
         ]);
     }

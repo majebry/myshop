@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/', function() {
+    return redirect('/products');
+});
+
 Route::get('/products', 'ProductController@index'); // List all products
 Route::get('/products/create', 'ProductController@create'); // Show form to add new product
 Route::post('/products', 'ProductController@store'); // Store the product in database
