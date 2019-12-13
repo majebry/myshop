@@ -19,7 +19,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        return view('products.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     public function store()
@@ -28,7 +30,9 @@ class ProductController extends Controller
         $product->name = request('name');
         $product->price = request('price');
         $product->description = request('description');
-        $product->save();
+
+        $category_id = request('category');
+        Category::find($category_id)->products()->save($product);
 
         return redirect('/products');
     }

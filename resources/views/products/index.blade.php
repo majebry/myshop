@@ -62,6 +62,8 @@
 
                   <div class="card-footer">
                     <a href="single.html" class="btn btn-info">View Product</a>
+
+                    {{ $product->category->name }}
                   </div>
                 </div>
 
