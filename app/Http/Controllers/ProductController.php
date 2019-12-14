@@ -43,4 +43,11 @@ class ProductController extends Controller
 
         return redirect('/products');
     }
+
+    public function show($id)
+    {
+        return view('products.show', [
+            'product' => Product::with('category')->find($id)
+        ]);
+    }
 }

@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="single.html" class="btn btn-info">View Product</a>
+                        <a href="{{ url("/products/$product->id") }}" class="btn btn-info">View Product</a>
 
                         {{ $product->category->name }}
                     </div>
