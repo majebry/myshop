@@ -4,7 +4,17 @@
 <div class="container">
     <h2>Add New Product</h2>
 
-    <form action="{{ url('/products') }}" method="POST">
+    @if ($errors->count())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ url('/products') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="row form-group">
@@ -40,6 +50,14 @@
                         <option value="{{ $category->id }}"> {{ $category->name }} </option>
                     @endforeach
                 </select>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class="col-2 col-form-label">Image</label>
+
+            <div class="col-10">
+                <input type="file" name="image" class="form-control">
             </div>
         </div>
 

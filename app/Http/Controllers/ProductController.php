@@ -33,10 +33,20 @@ class ProductController extends Controller
 
     public function store()
     {
+        request()->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'image' => 'required|image',
+            'category' => 'required|exists:categories,id'
+        ]);
+
+        $imagePath = request()->file('image')->store('public');
+
         $product = new Product;
         $product->name = request('name');
         $product->price = request('price');
         $product->description = request('description');
+        $product->image = str_replace('public/', '', $imagePath);
 
         $category_id = request('category');
         Category::find($category_id)->products()->save($product);

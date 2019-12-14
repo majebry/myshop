@@ -6,7 +6,9 @@
       <div class="col-4">
         <h2>Categories</h2>
 
+        @auth
         <a href="{{ url('/categories/create') }}" class="btn btn-primary mb-4">Add new Category</a>
+        @endauth
 
         <ul class="list-group">
           @foreach ($categories as $category)
@@ -20,7 +22,9 @@
       <div class="col-8">
         <h2>Products</h2>
 
+        @auth
         <a href="{{ url('/products/create') }}" class="btn btn-primary mb-4">Add new Product</a>
+        @endauth
 
         @if ($products->count())
         <div class="row">
@@ -28,7 +32,7 @@
                 <div class="col-6 mb-3">
 
                     <div class="card border-info">
-                    <img src="https://via.placeholder.com/350x250" alt="" class="card-img-top">
+                    <img src="{{ asset($product->image) }}" alt="" class="card-img-top">
 
                     <div class="card-body">
                         <h3 class="card-title">{{ $product->name }} <span class="badge badge-success">{{ $product->price }} LYD</span></h3>
