@@ -38,12 +38,22 @@
                         <h3 class="card-title">{{ $product->name }} <span class="badge badge-success">{{ $product->price }} LYD</span></h3>
 
                         <p class="card-text">{{ $product->description }}</p>
+
+                        <em>Category: <strong>{{ $product->category->name }}</strong></em>
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ url("/products/$product->id") }}" class="btn btn-info">View Product</a>
+                        <a href="{{ url("/products/$product->id") }}" class="btn btn-info">View</a>
+                        @auth
+                        <a href="{{ url("/products/$product->id/edit") }}" class="btn btn-warning">Edit</a>
 
-                        {{ $product->category->name }}
+                        <form action="{{ url("/products/$product->id") }}" method="post" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                        @endauth
                     </div>
                     </div>
 

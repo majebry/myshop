@@ -33,12 +33,7 @@ class ProductController extends Controller
 
     public function store()
     {
-        request()->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'image' => 'required|image',
-            'category' => 'required|exists:categories,id'
-        ]);
+        request()->validate($this->rules());
 
         $imagePath = request()->file('image')->store('public');
 
@@ -59,5 +54,55 @@ class ProductController extends Controller
         return view('products.show', [
             'product' => Product::with('category')->find($id)
         ]);
+    }
+
+    public function edit($id)
+    {
+        return view('products.edit',  [
+            'categories' => Category::all(),
+            'product' => Product::find($id)
+        ]);
+    }
+
+    public function update($id)
+    {
+        // request()->validate($this->rules());
+
+
+        $product = Product::find($id);
+
+        if (request()->file('image')) {
+            // TODO! delete previous image
+
+            $newImagePath = request()->file('image')->store('public');
+
+            $product->image = str_replace('public/', '', $newImagePath);
+        }
+
+        $product->name = request('name');
+        $product->price = request('price');
+        $product->description = request('description');
+        $product->save();
+
+        return redirect('/products');
+    }
+
+    private function rules()
+    {
+        return [
+            'name' => 'required',
+            'price' => 'required',
+            'image' => 'required|image',
+            'category' => 'required|exists:categories,id'
+        ];
+    }
+
+    public function destroy($id)
+    {
+        // TODO! remove image from storage
+
+        Product::find($id)->delete();
+
+        return redirect('/products');
     }
 }

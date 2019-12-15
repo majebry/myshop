@@ -4,10 +4,13 @@ Route::get('/', function() {
     return redirect('/products');
 });
 
-Route::get('/products', 'ProductController@index'); // List all products
-Route::get('/products/create', 'ProductController@create')->middleware('auth'); // Show form to add new product
-Route::post('/products', 'ProductController@store')->middleware('auth'); // Store the product in database
-Route::get('/products/{id}', 'ProductController@show'); // Show one product
+Route::get('/products',          'ProductController@index'); // List all products
+Route::get('/products/create',   'ProductController@create')->middleware('auth'); // Show form to add new product
+Route::post('/products',         'ProductController@store')->middleware('auth'); // Store the product in database
+Route::get('/products/{id}',     'ProductController@show'); // Show one product
+Route::get('/products/{id}/edit','ProductController@edit')->middleware('auth'); // Show form to edit a specific existing product
+Route::patch('/products/{id}',   'ProductController@update')->middleware('auth'); // update product details in database
+Route::delete('/products/{id}',  'ProductController@destroy')->middleware('auth'); // delete a record from database
 
 Route::get('/categories/create', 'CategoryController@create')->middleware('auth'); // Show form to add new category
 Route::post('/categories', 'CategoryController@store')->middleware('auth'); // Store the submitted category in database
