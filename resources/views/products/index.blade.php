@@ -10,13 +10,11 @@
         <a href="{{ url('/categories/create') }}" class="btn btn-primary mb-4">Add new Category</a>
         @endauth
 
-        <ul class="list-group">
+        <div class="list-group">
           @foreach ($categories as $category)
-              <li class="list-group-item bg-secondary text-white">
-                <a href="{{ url('/products?category_id=' . $category->id) }}">{{ $category->name }}</a>
-              </li>
+            <a class="list-group-item list-group-item-action bg-secondary text-white" href="{{ url('/products?category_id=' . $category->id) }}">{{ $category->name }}</a>
           @endforeach
-        </ul>
+        </div>
       </div>
 
       <div class="col-8">
@@ -32,7 +30,7 @@
                 <div class="col-6 mb-3">
 
                     <div class="card border-info">
-                    <img src="{{ asset($product->image) }}" alt="" class="card-img-top">
+                    <img src="{{ asset(Storage::url($product->image)) }}" alt="" class="card-img-top">
 
                     <div class="card-body">
                         <h3 class="card-title">{{ $product->name }} <span class="badge badge-success">{{ $product->price }} LYD</span></h3>

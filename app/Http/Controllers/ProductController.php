@@ -41,7 +41,7 @@ class ProductController extends Controller
         $product->name = request('name');
         $product->price = request('price');
         $product->description = request('description');
-        $product->image = str_replace('public/', '', $imagePath);
+        $product->image = $imagePath;
 
         $category_id = request('category');
         Category::find($category_id)->products()->save($product);
@@ -71,11 +71,11 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         if (request()->file('image')) {
-            // TODO! delete previous image
+            \Storage::delete($product->image);
 
             $newImagePath = request()->file('image')->store('public');
 
-            $product->image = str_replace('public/', '', $newImagePath);
+            $product->image = $newImagePath;
         }
 
         $product->name = request('name');
@@ -98,9 +98,11 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        // TODO! remove image from storage
+        $product = Product::find($id);
 
-        Product::find($id)->delete();
+        \Storage::delete($product->image);
+
+        $product->delete();
 
         return redirect('/products');
     }

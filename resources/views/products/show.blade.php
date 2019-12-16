@@ -16,7 +16,7 @@
 
     <hr>
 
-    <img src="https://via.placeholder.com/350x250" class="float-right img-thumbnail">
+    <img src="{{ asset(Storage::url($product->image)) }}" class="float-right img-thumbnail" width="500">
 
     <p>{{ $product->description }}</p>
   </div>

@@ -61,7 +61,7 @@
                 <input type="file" name="image" class="form-control">
 
                 @if ($product->image)
-                    <img src="{{ asset($product->image) }}" alt="" width="250">
+                    <img src="{{ asset(Storage::url($product->image)) }}" alt="" width="250">
                 @endif
             </div>
         </div>
