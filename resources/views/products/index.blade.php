@@ -59,6 +59,8 @@
 
                 </div>
                 @endforeach
+
+                {{ $products->links() }}
             </div>
         @else
             <div class="alert alert-warning">There are no products to show here!</div>

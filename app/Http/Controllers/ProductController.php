@@ -19,7 +19,7 @@ class ProductController extends Controller
         });
 
         return view('products.index', [
-            'products' => $products->get(),
+            'products' => $products->paginate(8),
             'categories' => Category::all()
         ]);
     }
@@ -66,8 +66,7 @@ class ProductController extends Controller
 
     public function update($id)
     {
-        // request()->validate($this->rules());
-
+        request()->validate($this->rules());
 
         $product = Product::find($id);
 
