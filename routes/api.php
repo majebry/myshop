@@ -1,18 +1,19 @@
 <?php
 
-use Illuminate\Http\Request;
+Route::get('/categories', 'API\CategoryController@index');
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::get('/products', 'API\ProductController@index');
+Route::get('/products/{id}', 'API\ProductController@show');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/cart-items', 'API\CartItemController@store');
+Route::patch('/cart-items/{cart_item}', 'API\CartItemController@update');
+Route::delete('/cart-items/{cart_item}', 'API\CartItemController@destroy');
+
+Route::get('/my-cart/{customer}', function ($customer) {
+    $customerItems = \App\CartItem::where('customer_name', $customer);
+
+    return [
+        'items' => $customerItems->with('product')->get(),
+        // 'total_price' => $customerItems->products()->sum('price')
+    ];
 });
