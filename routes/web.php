@@ -1,8 +1,6 @@
 <?php
 
-// Route::get('/', function() {
-//     return redirect('/products');
-// });
+Route::get('/', 'HomeController@home');
 
 Route::get('/products',          'ProductController@index'); // List all products
 Route::get('/products/create',   'ProductController@create')->middleware('auth'); // Show form to add new product
@@ -17,8 +15,7 @@ Route::post('/categories', 'CategoryController@store')->middleware('auth'); // S
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/home', 'HomeController@dashboard')->name('home');
 
 // Customer Routes
 Route::get('/customer/login', 'Customer\AuthController@showLoginForm');

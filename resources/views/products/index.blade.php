@@ -58,7 +58,9 @@
                 </div>
                 @endforeach
 
-                {{ $products->links() }}
+                <div class="mx-auto">
+                    {{ $products->links() }}
+                </div>
             </div>
         @else
             <div class="alert alert-warning">There are no products to show here!</div>
