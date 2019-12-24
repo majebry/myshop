@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Customer;
 
+use App\Customer;
 use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -58,5 +59,22 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
+    }
+
+    public function register()
+    {
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:customers',
+            'password' => 'required|min:6|confirmed'
+        ]);
+
+        $customer = new Customer;
+        $customer->name = request('name');
+        $customer->email = request('email');
+        $customer->password = bcrypt(request('password'));
+        $customer->save();
+
+        return response()->json($customer);
     }
 }

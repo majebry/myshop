@@ -16,6 +16,11 @@
           <li class="nav-item">
             <a href="{{ url('/') }}" class="nav-link">Home</a>
           </li>
+          @auth
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/orders') }}">Orders</a>
+            </li>
+          @endauth
         </ul>
         <ul class="navbar-nav">
           <!-- Authentication Links -->

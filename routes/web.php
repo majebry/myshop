@@ -13,6 +13,9 @@ Route::delete('/products/{id}',  'ProductController@destroy')->middleware('auth'
 Route::get('/categories/create', 'CategoryController@create')->middleware('auth'); // Show form to add new category
 Route::post('/categories', 'CategoryController@store')->middleware('auth'); // Store the submitted category in database
 
+Route::get('/orders', 'OrderController@index');//->middleware('auth');
+Route::get('/orders/{id}', 'OrderController@show');//->middleware('auth');
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@dashboard')->name('home');
