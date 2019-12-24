@@ -24,3 +24,5 @@ Route::get('/home', 'HomeController@dashboard')->name('home');
 Route::get('/customer/login', 'Customer\AuthController@showLoginForm');
 Route::post('/customer/login', 'Customer\AuthController@login');
 Route::post('/customer/logout', 'Customer\AuthController@logoutt');
+
+Route::post('products/{product_id}/ratings', 'ProductRatingController@store');

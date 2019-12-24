@@ -38,6 +38,16 @@
                         <p class="card-text">{{ $product->description }}</p>
 
                         <em>Category: <strong>{{ $product->category->name }}</strong></em>
+
+                        <div id="product-rate-{{$product->id}}">
+                            <select name="rating" onchange="rate({{ $product->id }}, this.value)">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="card-footer">
@@ -71,4 +81,19 @@
 </div>
 </div>
 
+@endsection
+
+@section('scripts')
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        function rate(productId, value) {
+            axios.post('/products/' + productId + '/ratings', {
+                rating: value
+            })
+            .then(function(response) {
+                document.getElementById('product-rate-' + productId).innerHTML = response.data.average
+            });
+        }
+    </script>
 @endsection
