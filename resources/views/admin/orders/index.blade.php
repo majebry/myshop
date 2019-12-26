@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('admin.layouts.admin')
 
 @section('content')
     <div class="container">
@@ -24,7 +24,7 @@
                     <td>{{ $order->order_items()->sum(\DB::raw('sold_price * quantity')) }}</td>
                     <td>{{ $order->created_at }}</td>
                     <td>
-                        <a href="{{ url('orders/' . $order->id) }}" class="btn btn-info">View</a>
+                        <a href="{{ url('admin/orders/' . $order->id) }}" class="btn btn-info">View</a>
                     </td>
                 </tr>
             @endforeach

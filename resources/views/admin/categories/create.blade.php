@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('admin.layouts.admin')
 
 @section('content')
 <div class="container">
@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ url('/categories') }}" method="POST">
+    <form action="{{ url('admin/categories') }}" method="POST">
         @csrf
 
         <div class="row form-group">

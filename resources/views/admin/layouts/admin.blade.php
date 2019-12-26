@@ -9,15 +9,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
 </head>
 <body>
     <div id="app">
@@ -33,7 +30,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @auth
+                            <li class="nav-item">
+                                <a href="{{ url('admin/categories') }}" class="nav-link">Categories</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('admin/products') }}" class="nav-link">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('admin/orders') }}">Orders</a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -76,5 +83,6 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('bootstrap.min.js') }}"></script>
 </body>
 </html>

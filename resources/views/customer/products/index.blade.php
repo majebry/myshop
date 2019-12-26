@@ -20,10 +20,6 @@
       <div class="col-8">
         <h2>Products</h2>
 
-        @auth
-        <a href="{{ url('/products/create') }}" class="btn btn-primary mb-4">Add new Product</a>
-        @endauth
-
         @if ($products->count())
         <div class="row">
             @foreach($products as $product)
@@ -51,17 +47,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <a href="{{ url("/products/$product->id") }}" class="btn btn-info">View</a>
-                        @auth
-                        <a href="{{ url("/products/$product->id/edit") }}" class="btn btn-warning">Edit</a>
-
-                        <form action="{{ url("/products/$product->id") }}" method="post" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-
-                            <input type="submit" value="Delete" class="btn btn-danger">
-                        </form>
-                        @endauth
+                        <a href="{{ url("customer/products/$product->id") }}" class="btn btn-info">View</a>
                     </div>
                     </div>
 

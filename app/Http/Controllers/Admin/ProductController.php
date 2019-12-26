@@ -1,32 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Controllers\Controller;
 use App\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::latest(); // Product::query()
-
-        // if the user requested products for a specific category
-        // just return for them products for that category
-
-        $products->when(request('category_id'), function($q) {
-            $q->where('category_id', request('category_id'));
-        });
-
-        return view('products.index', [
-            'products' => $products->paginate(8),
-            'categories' => Category::all()
+        return view('admin.products.index', [
+            'products' => Product::all()
         ]);
     }
 
     public function create()
     {
-        return view('products.create', [
+        return view('admin.products.create', [
             'categories' => Category::all()
         ]);
     }
@@ -46,19 +38,12 @@ class ProductController extends Controller
         $category_id = request('category');
         Category::find($category_id)->products()->save($product);
 
-        return redirect('/products');
-    }
-
-    public function show($id)
-    {
-        return view('products.show', [
-            'product' => Product::with('category')->find($id)
-        ]);
+        return redirect('admin/products');
     }
 
     public function edit($id)
     {
-        return view('products.edit',  [
+        return view('admin.products.edit',  [
             'categories' => Category::all(),
             'product' => Product::find($id)
         ]);
@@ -83,7 +68,7 @@ class ProductController extends Controller
         $product->description = request('description');
         $product->save();
 
-        return redirect('/products');
+        return redirect('admin/products');
     }
 
     private function rules()
@@ -104,6 +89,6 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect('/products');
+        return redirect('admin/products');
     }
 }

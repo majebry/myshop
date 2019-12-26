@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -25,14 +26,14 @@ class OrderController extends Controller
             $orders->whereDate('created_at', '<=', request('created_before'));
         }
 
-        return view('orders.index', [
+        return view('admin.orders.index', [
             'orders' => $orders->get()
         ]);
     }
 
     public function show($id)
     {
-        return view('orders.show', [
+        return view('admin.orders.show', [
             'order' =>  Order::with('order_items')->find($id)
         ]);
     }

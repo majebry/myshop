@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <form action="{{ url('/products/' . $product->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ url('admin/products/' . $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
 

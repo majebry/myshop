@@ -13,6 +13,6 @@ class HomeController extends Controller
 
     public function home()
     {
-        return redirect('/products');
+        return redirect('customer/products');
     }
 }

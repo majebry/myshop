@@ -1,15 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function index()
+    {
+        return view('admin.categories.index', [
+            'categories' => Category::all()
+        ]);
+    }
+
     public function create()
     {
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     public function store()
@@ -22,6 +30,6 @@ class CategoryController extends Controller
         $category->name = request('name');
         $category->save();
 
-        return redirect('/products');
+        return redirect('admin/categories');
     }
 }
