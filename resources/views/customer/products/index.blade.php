@@ -74,7 +74,7 @@
 
     <script>
         function rate(productId, value) {
-            axios.post('/products/' + productId + '/ratings', {
+            axios.post('/customer/products/' + productId + '/ratings', {
                 rating: value
             })
             .then(function(response) {

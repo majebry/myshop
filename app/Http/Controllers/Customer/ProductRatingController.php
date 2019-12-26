@@ -14,7 +14,7 @@ class ProductRatingController extends Controller
         $product = Product::find($product_id);
 
         $rating = new \willvincent\Rateable\Rating;
-        $rating->customer_id = Customer::first()->id;
+        $rating->customer_id = auth('web_customer')->id();
         $rating->rating = request('rating');
 
         $product->ratings()->save($rating);

@@ -11,6 +11,7 @@ Route::delete('admin/products/{id}',  'Admin\ProductController@destroy')->middle
 Route::get('admin/categories', 'Admin\CategoryController@index')->middleware('auth'); // Show form to add new category
 Route::get('admin/categories/create', 'Admin\CategoryController@create')->middleware('auth'); // Show form to add new category
 Route::post('admin/categories', 'Admin\CategoryController@store')->middleware('auth'); // Store the submitted category in database
+Route::delete('admin/categories/{id}', 'Admin\CategoryController@destroy')->middleware('auth');
 
 Route::get('admin/orders', 'Admin\OrderController@index')->middleware('auth');
 Route::get('admin/orders/{id}', 'Admin\OrderController@show')->middleware('auth');

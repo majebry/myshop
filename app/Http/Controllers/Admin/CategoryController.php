@@ -32,4 +32,11 @@ class CategoryController extends Controller
 
         return redirect('admin/categories');
     }
+
+    public function destroy($id)
+    {
+        Category::find($id)->delete();
+
+        return redirect('admin/categories');
+    }
 }
